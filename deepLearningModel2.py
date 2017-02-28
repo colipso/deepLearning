@@ -201,6 +201,23 @@ class Network(object):
 dataFile = './data/mnist.pkl.gz'
 train_data , val_data , test_data = load_data_wrapper(dataFile)
 net = Network([784,30,10])
-net.SGD(train_data,epochs = 30, mini_batch_size = 10,eta = 3.0, lmbda = 0.0 , evaluation_data = test_data ,
+evaluation_cost, evaluation_accuracy , training_cost, training_accuracy = net.SGD(train_data,epochs = 30, mini_batch_size = 10,eta = 3.0, lmbda = 0.0 , evaluation_data = test_data ,
         monitor_evaluation_cost=True, monitor_evaluation_accuracy=True, monitor_training_cost=True, 
             monitor_training_accuracy=True)
+
+import pygal
+chart = pygal.Line(height=350)
+chart.x_labels = map(str, range(0, 30))
+chart.add('evaluation_cost' , evaluation_cost)
+chart.add('training_cost' , training_cost)
+chart.render_in_browser()
+
+chart1 = pygal.Line(height=350)
+chart1.x_labels = map(str, range(0, 30))
+chart1.add('evaluation_accuracy' , evaluation_accuracy)
+chart1.render_in_browser()
+
+chart2 = pygal.Line(height=350)
+chart2.x_labels = map(str, range(0, 30))
+chart2.add('training_accuracy' , training_accuracy)
+chart2.render_in_browser()
