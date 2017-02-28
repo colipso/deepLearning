@@ -1,0 +1,6 @@
+*.ipynb
+data/
+log.txt
+Dockerfile
+.ipynb_checkpoints/
+README.md
